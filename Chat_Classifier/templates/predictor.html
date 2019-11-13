@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+  <link rel="icon" type="image/png" href="static/images/icons/cat.png"/>
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/vendor/animate/animate.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="static/css/util.css">
+  <link rel="stylesheet" type="text/css" href="static/css/main.css">
+<!--===============================================================================================-->
+  <!-- <link rel="stylesheet" type="text/css" href="static/css/textbox.css"> -->
+  <script src="https://kit.fontawesome.com/08bacb5720.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"> 
+    <!-- navbar navbar-expand-lg navbar-light bg-light -->
+    <!-- <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button> -->
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+            <!-- nav-link dropdown-toggler -->
+            <a class="nav-link dropdown-toggler-right" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="http://127.0.0.1:5000/">Toxicity Prediction</a>
+                <!-- <a class="dropdown-item" href="http://127.0.0.1:5000/guide">Guide</a>
+                <a class="dropdown-item" href="http://127.0.0.1:5000/about">About</a> -->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="http://127.0.0.1:5000/logout">Log Out</a>
+            </div>
+        </li>
+          </ul>
+        <!-- <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+    
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Welcome: {{user}}</a>
+        </li>
+      </div>
+</nav>
+  <style>
+    body{
+      background-size: auto;
+      background-position: 100% 10%, 5% 10%;
+      /* background-attachment: inherit; */
+      /* background-repeat: no-repeat, no-repeat; */
+      /* background-color: whitesmoke; */
+      background-color: #2f4353;
+      background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
+      /* background-image: url("static/images/gifs/wordcloud.png"); */
+      width: 100%; height: auto 
+    }
+    td{
+      color:black;
+      font-weight:bold ;
+      font-size: 20px;
+    }
+    th{
+      background-color: whitesmoke;
+      }
+  </style>
+
+  <!-- <div id="example1" class="limiter">
+    <div class="container-table100">
+      <div class="wrap-table100">
+        <div class="table100">
+          <div style="max-width:25%; margin-left: auto; margin-right: auto;">
+          </div> -->
+          
+  <form action="/">
+    <div style="text-align: center;">
+        <!-- <h1 class="headertext">Toxic Chat Classifier</h1> -->
+        <br>
+        <br>
+        <br>
+        <!-- <h4 style="font-weight:bold;">Input a word or phrase to get its toxicity levels:</h4> -->
+        <br>
+        <center>
+          <input placeholder="Input a word or phrase to get its toxicity levels:" align = "center" type="text" name="chat_in" autofocus="autofocus" value="{{x_input}}" maxlength="500" id="rcorners2">
+        </center>
+        <br>
+    <!-- Submit button -->
+    <center>
+      <!-- <input align="center" type="submit" value="Submit" method="get" id="rcorners1"> -->
+      <button align="center "type="submit" value="Submit" method = "get" class="btn btn-outline-info" style="font-weight:bold">Submit</button>
+    </center>
+  </form>
+    </div>
+    <!-- {% for p in prediction %}
+      <br>  {{p['name']}}:{{ (100*p['prob']) | round }}%
+    {% endfor %} -->
+  <!-- </p> -->
+        <div style="max-width:75%;margin-left: auto; margin-right: auto;">
+          <table>
+            <thead>
+              <br>
+              <tr class="table100-head">
+                <th class="column1" style="color:black;font-weight:bold ;">String Input</th>
+                  <th colspan="2" class="column1" style="color:black;font-weight:bold ;">Toxicity Levels (Predictions)</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td rowspan="6" class="column1">{{ chat_in }}</td>
+                  <td><div id='plotku'></div></td>
+                  <!-- <td class="column1" style="background-color: burlywood">{{prediction[0]['name']}}</td> -->
+                  <!-- <td class="column2">{{ (100 * prediction[0]['prob']) | round}}%</td> -->
+                </tr>
+            </tbody>
+          </table>
+        </div><br>
+          <div style="text-align: center; color: #808080;">
+          <h5><a class="fab fa-github" href="https://www.github.com/" style="color: white;" size: 9x;></a>&nbsp; &nbsp;
+          <a class="fab fa-linkedin" href="https://www.github.com/" style="color: white;"></a></h5>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--===============================================================================================-->
+  <script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+  <script src="static/vendor/bootstrap/js/popper.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+  <script src="static/vendor/select2/select2.min.js"></script>
+  <!-- <script src="static/js/textbox.js"></script> -->
+<!--===============================================================================================-->
+ 
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.11.0/d3.js" integrity="sha256-cWwi30eyRTyVagkLLAwXp92jxARPpGH3u+5Vr0UJtGQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+    var z={{ x | safe }}
+    Plotly.plot('plotku',z,{})
+    </script>
+</body>
+</html>
